@@ -1,0 +1,24 @@
+{
+  "name": "RuTracker.org Search",
+  "short_name": "RTSearch",
+  "description": "Searches for the selected text in the RuTracker.org",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "assets/icon-bitty.png",
+    "48": "assets/icon-small.png",
+    "128": "assets/icon-large.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://rutracker.org/"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
