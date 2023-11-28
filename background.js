@@ -11,9 +11,7 @@ chrome.contextMenus.onClicked.addListener(async function (info) {
         url: "https://rutracker.org/forum/tracker.php?nm=" + encodeURIComponent(info.selectionText)
     });
 
-    console.log('inject function');
-
-    chrome.scripting.executeScript(
+    await chrome.scripting.executeScript(
         {
             target: {
                 tabId: tab.id,
@@ -21,5 +19,5 @@ chrome.contextMenus.onClicked.addListener(async function (info) {
             },
             files: ['contentScript.js']
         },
-    ).then(() => console.log("injected a function"));
+    );
 })
