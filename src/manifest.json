@@ -5,9 +5,9 @@
   "version": "1.0",
   "manifest_version": 3,
   "icons": {
-    "16": "assets/icon-bitty.png",
-    "48": "assets/icon-small.png",
-    "128": "assets/icon-large.png"
+    "16": "icon/icon-bitty.png",
+    "48": "icon/icon-small.png",
+    "128": "icon/icon-large.png"
   },
   "permissions": [
     "contextMenus",
@@ -19,9 +19,9 @@
     "https://rutracker.org/"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "src/popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/scripts/background.ts"
   }
 }

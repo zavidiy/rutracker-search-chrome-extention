@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RuTracker.org Search</title>
+    <link rel="stylesheet" href="styles/popup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/popup.ts" type="module"></script>
+</head>
+<body>
+
+<header class="header">
+    <img class="header__logo" src="../public/icon.svg" alt="logo">
+    <h1 class="header__title">RuTracker.org Search</h1>
+</header>
+
+<section class="settings">
+    <div class="settings__option">
+        <label for="sortingOrderSelect">
+            Order by (default):
+        </label>
+        <select id="sortingOrderSelect">
+            <option value="registered">Registered</option>
+            <option value="topicName">Topic name</option>
+            <option value="numberOfDownloads">Number of downloads</option>
+            <option value="numberOfSeeds">Number of seeds</option>
+            <option value="numberOfLeeches">Number of leeches</option>
+            <option value="size">Size</option>
+        </select>
+    </div>
+</section>
+<footer class="footer">
+    <button id="openRuTrackerButton">
+        rutracker.org
+    </button>
+</footer>
+</body>
+</html>

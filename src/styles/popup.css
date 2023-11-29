@@ -56,8 +56,10 @@ body {
     height: 50px;
 }
 
-.footer a {
+.footer button {
     color: #006699;
+    background: none;
+    border: none;
     text-decoration: underline;
     font-size: 15px;
     font-weight: lighter;
