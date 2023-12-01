@@ -13,7 +13,8 @@
     "contextMenus",
     "tabs",
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
     "https://rutracker.org/"
@@ -22,6 +23,7 @@
     "default_popup": "src/popup.html"
   },
   "background": {
-    "service_worker": "src/scripts/background.ts"
+    "service_worker": "src/scripts/background.ts",
+    "type": "module"
   }
 }

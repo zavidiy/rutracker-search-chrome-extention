@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import {setSortingOrder} from './contentScript';
 
 console.log('background')
 
@@ -27,7 +26,7 @@ browser.contextMenus.onClicked.addListener(async function (info) {
                 tabId: tab.id,
                 allFrames: true
             },
-            func: setSortingOrder
+            files: ['/src/contentScripts/contentScript.js'],
         },
     );
 })

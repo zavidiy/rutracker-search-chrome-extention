@@ -1,14 +1,17 @@
 import {DEFAULT_SETTINGS} from './staticData';
 import {Settings} from './types';
+import browser from 'webextension-polyfill';
 
-export function loadSettings(): Settings {
-    const loadedSettingsStr = localStorage.getItem("settings");
+export async function loadSettings(): Promise<Settings> {
+    const loadedSettingsStr = await browser.storage.local.get("settings");
+    // const loadedSettingsStr = localStorage.getItem("settings");
 
     if (!loadedSettingsStr) {
         return DEFAULT_SETTINGS;
     }
 
-    const loadedSettings = JSON.parse(loadedSettingsStr);
+    // const loadedSettings = JSON.parse(loadedSettingsStr);
+    const loadedSettings = loadedSettingsStr
 
     removeNonRelevantFields(loadedSettings);
 
@@ -26,6 +29,7 @@ function removeNonRelevantFields(loadedSettings: { [key: string]: any }) {
     });
 }
 
-export function saveSettings(settings: Settings) {
-    localStorage.setItem("settings", JSON.stringify(settings));
+export async function saveSettings(settings: Settings) {
+    await browser.storage.local.set(settings);
+    // localStorage.setItem("settings", JSON.stringify(settings));
 }
