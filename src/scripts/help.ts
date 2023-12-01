@@ -3,15 +3,7 @@ import {Settings} from './types';
 import browser from 'webextension-polyfill';
 
 export async function loadSettings(): Promise<Settings> {
-    const loadedSettingsStr = await browser.storage.local.get("settings");
-    // const loadedSettingsStr = localStorage.getItem("settings");
-
-    if (!loadedSettingsStr) {
-        return DEFAULT_SETTINGS;
-    }
-
-    // const loadedSettings = JSON.parse(loadedSettingsStr);
-    const loadedSettings = loadedSettingsStr
+    const loadedSettings = await browser.storage.local.get();
 
     removeNonRelevantFields(loadedSettings);
 
