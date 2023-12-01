@@ -1,13 +1,10 @@
 import {loadSettings} from '../scripts/help';
 import {SortingOrderType} from '../scripts/types';
-
-const SORTING_ORDER_SELECT_ELEMENT_ID = 'o';
-
-const SUBMIT_BUTTON_ELEMENT_ID = 'tr-submit-btn';
-
-const SORTING_ORDER_OPTION_BY_TYPE: Record<SortingOrderType, string> = {
-    numberOfDownloads: '', numberOfLeeches: '', numberOfSeeds: '10', registered: '', size: '', topicName: ''
-}
+import {
+    SORTING_ORDER_OPTION_BY_TYPE,
+    SORTING_ORDER_SELECT_ELEMENT_ID,
+    SUBMIT_BUTTON_ELEMENT_ID
+} from '../scripts/staticData';
 
 loadSettings().then(({orderBy}) => {
     setSortingOrder(orderBy);
@@ -15,10 +12,9 @@ loadSettings().then(({orderBy}) => {
 
 
 function setSortingOrder(orderBy: SortingOrderType) {
-    console.log('content script');
-
-    console.log('orderBy', orderBy);
-    console.log('casted', SORTING_ORDER_OPTION_BY_TYPE[orderBy]);
+    if(orderBy === SortingOrderType.REGISTERED) {
+        return;
+    }
 
     const sortingOrderSelect = getSortingOrderSelect();
     const sortingOrderOptionIndex = getSortingOrderOptionIndex(sortingOrderSelect, SORTING_ORDER_OPTION_BY_TYPE[orderBy]);
