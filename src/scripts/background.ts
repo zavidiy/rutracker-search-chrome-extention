@@ -6,14 +6,25 @@ browser.runtime.onInstalled.addListener(function () {
     browser.contextMenus.create({
         "id": "ruTrackerSearch",
         "contexts": ["selection"],
-        "title": 'Search "%s" in rutracker.org'
+        "title": 'Search "%s"'
+    });
+
+    browser.contextMenus.create({
+        id: "ruTrackerSearchInBackground",
+        contexts: ["selection"],
+        title: 'Search "%s" in background',
     });
 });
 
 browser.contextMenus.onClicked.addListener(async function (info) {
-    const selectedText = info.selectionText ?? '';
+    await search(info, info.menuItemId === "ruTrackerSearchInBackground");
+})
+
+async function search(info: any, background: boolean) {
+    const selectedText: any = info.selectionText !== undefined ? info.selectionText : '';
     const tab = await browser.tabs.create({
-        url: "https://rutracker.org/forum/tracker.php?nm=" + encodeURIComponent(selectedText)
+        url: "https://rutracker.org/forum/tracker.php?nm=" + encodeURIComponent(selectedText),
+        active: !background
     });
 
     if (!tab.id) {
@@ -29,4 +40,4 @@ browser.contextMenus.onClicked.addListener(async function (info) {
             files: ['/src/contentScripts/contentScript.js'],
         },
     );
-})
+}
