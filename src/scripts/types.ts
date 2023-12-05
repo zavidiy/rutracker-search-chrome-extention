@@ -8,5 +8,5 @@ export enum SortingOrderType {
 }
 
 export type Settings = {
-    orderBy?: SortingOrderType
+    orderBy: SortingOrderType
 }
