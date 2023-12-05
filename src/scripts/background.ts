@@ -6,33 +6,33 @@ const backgroundTitleFormat = 'Search "%s" in background';
 let searchInnerTextContextMenuID: string | number;
 let searchInnerTextInBackgroundContextMenuID: string | number;
 
-// browser.runtime.onInstalled.addListener(function () {
-browser.contextMenus.create({
-    "id": "ruTrackerSearch",
-    "contexts": ["selection",],
-    "title": titleFormat,
-});
+browser.runtime.onInstalled.addListener(function () {
+    browser.contextMenus.create({
+        "id": "ruTrackerSearch",
+        "contexts": ["selection",],
+        "title": titleFormat,
+    });
 
-browser.contextMenus.create({
-    id: "ruTrackerSearchInBackground",
-    contexts: ["selection"],
-    title: backgroundTitleFormat,
-});
+    browser.contextMenus.create({
+        id: "ruTrackerSearchInBackground",
+        contexts: ["selection"],
+        title: backgroundTitleFormat,
+    });
 
-searchInnerTextContextMenuID = browser.contextMenus.create({
-    id: "ruTrackerSearchInnerText",
-    contexts: ["all"],
-    title: 'Search inner text',
-    visible: false
-});
+    searchInnerTextContextMenuID = browser.contextMenus.create({
+        id: "ruTrackerSearchInnerText",
+        contexts: ["all"],
+        title: 'Search inner text',
+        visible: false
+    });
 
-searchInnerTextInBackgroundContextMenuID = browser.contextMenus.create({
-    id: "ruTrackerSearchInnerTextInBackground",
-    contexts: ["all"],
-    title: 'Search inner text in background',
-    visible: false
+    searchInnerTextInBackgroundContextMenuID = browser.contextMenus.create({
+        id: "ruTrackerSearchInnerTextInBackground",
+        contexts: ["all"],
+        title: 'Search inner text in background',
+        visible: false
+    });
 });
-// });
 
 browser.runtime.onMessage.addListener(textClickedHandler);
 browser.contextMenus.onClicked.addListener(contextMenusClickedHandler)
