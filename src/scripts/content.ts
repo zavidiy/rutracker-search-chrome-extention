@@ -11,17 +11,11 @@ document.addEventListener("mousedown", async function (event) {
 
     clickedText = (event.target as HTMLElement)?.innerText;
 
-    await browser.runtime.sendMessage(browser.runtime.id, {type: 'onTextClicked', text: clickedText});
-}, true);
-
-browser.runtime.onMessage.addListener(function (request, _, sendResponse: (response: {
-    text?: string
-}) => void) {
-    if (request !== "getClickedText") {
-        return;
-    }
-
-    sendResponse({
+    await browser.runtime.sendMessage(browser.runtime.id, {
+        type: 'onTextClicked',
         text: clickedText,
+        selection: window.getSelection()?.toString()
     });
-});
+
+    console.log('send mousedown');
+}, true);
