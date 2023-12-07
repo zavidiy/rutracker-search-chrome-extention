@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(#03699C,#2282B2);
+    background: linear-gradient(#03699C, #2282B2);
     border: solid 1px #b7c0c5;
 }
 
@@ -56,11 +56,10 @@ body {
     height: 50px;
 }
 
-.footer button {
+.footer__link {
     color: #006699;
     background: none;
     border: none;
-    text-decoration: underline;
     font-size: 15px;
     font-weight: lighter;
 }

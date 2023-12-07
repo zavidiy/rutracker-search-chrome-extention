@@ -3,9 +3,6 @@ import browser from 'webextension-polyfill';
 const titleFormat = 'Search "%s"';
 const backgroundTitleFormat = 'Search "%s" in background';
 
-let searchInnerTextContextMenuID: string | number;
-let searchInnerTextInBackgroundContextMenuID: string | number;
-
 browser.runtime.onInstalled.addListener(function () {
     browser.contextMenus.create({
         "id": "ruTrackerSearch",
@@ -19,19 +16,25 @@ browser.runtime.onInstalled.addListener(function () {
         title: backgroundTitleFormat,
     });
 
-    searchInnerTextContextMenuID = browser.contextMenus.create({
+    browser.contextMenus.create({
         id: "ruTrackerSearchInnerText",
         contexts: ["all"],
         title: 'Search inner text',
         visible: false
     });
 
-    searchInnerTextInBackgroundContextMenuID = browser.contextMenus.create({
+    browser.contextMenus.create({
         id: "ruTrackerSearchInnerTextInBackground",
         contexts: ["all"],
         title: 'Search inner text in background',
         visible: false
     });
+
+    browser.contextMenus.create({
+        id: "openRuTrackerSearch",
+        contexts: ["all"],
+        title: 'Open rutracker.org searching page',
+    })
 });
 
 browser.runtime.onMessage.addListener(textClickedHandler);
@@ -50,13 +53,13 @@ async function textClickedHandler(
     const visible = !selection && !!text;
 
     await Promise.all([
-        browser.contextMenus.update(searchInnerTextContextMenuID, {
+        browser.contextMenus.update('ruTrackerSearchInnerText', {
             visible: visible,
             title: createTitle(titleFormat, text),
             async onclick() {
                 await search(text, false);
             }
-        }), browser.contextMenus.update(searchInnerTextInBackgroundContextMenuID, {
+        }), browser.contextMenus.update('ruTrackerSearchInnerTextInBackground', {
             visible: visible,
             title: createTitle(backgroundTitleFormat, text),
             async onclick() {
@@ -85,6 +88,11 @@ async function contextMenusClickedHandler(info: browser.Menus.OnClickData, _: br
         case "ruTrackerSearchInBackground":
             await search(info.selectionText, true);
             break;
+
+        case 'openRuTrackerSearch':
+            await browser.tabs.create({
+                url: 'https://rutracker.org/forum/tracker.php'
+            })
     }
 }
 

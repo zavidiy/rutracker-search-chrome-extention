@@ -1,5 +1,5 @@
 export type StaticData = {
-    openRuTrackerButtonElementId: string;
+    openGitHubButtonElementId: string;
     sortingOrderSelectElementId: string;
-    ruTrackerURL: string;
+    gitHubURL: string;
 }

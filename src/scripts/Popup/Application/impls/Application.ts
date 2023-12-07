@@ -6,8 +6,8 @@ import {IApplication} from '../IApplication';
 
 export class Application implements IApplication {
     private _settings!: Settings;
-    private _ruTrackerURL!: string;
-    private _openRuTrackerButton!: HTMLButtonElement;
+    private _gitHubURL!: string;
+    private _openGitHubButton!: HTMLButtonElement;
     private _sortingOrderSelect!: HTMLSelectElement;
 
     constructor(private readonly _settingsProvider: ISettingsProvider, private staticDataProvider: IStaticDataProvider) {
@@ -15,27 +15,27 @@ export class Application implements IApplication {
 
     async initialize() {
         const {
-            openRuTrackerButtonElementId,
+            openGitHubButtonElementId,
             sortingOrderSelectElementId,
-            ruTrackerURL
+            gitHubURL
         } = await this.staticDataProvider.getStaticData();
 
-        this._ruTrackerURL = ruTrackerURL;
+        this._gitHubURL = gitHubURL;
         this._settings = await this._settingsProvider.getSettings();
-        this._openRuTrackerButton = this.getOpenRuTrackerButton(openRuTrackerButtonElementId);
+        this._openGitHubButton = this.getOpenGitHubButton(openGitHubButtonElementId);
         this._sortingOrderSelect = this.getSortingOrderSelect(sortingOrderSelectElementId);
 
-        this.initializeOpenRuTrackerButton();
+        this.initializeOpenGitHubButton();
         this.initializeSortingOrderSelect();
     }
 
-    private initializeOpenRuTrackerButton() {
-        this._openRuTrackerButton.addEventListener('click', this.openRuTrackerButtonClickHandler.bind(this))
+    private initializeOpenGitHubButton() {
+        this._openGitHubButton.addEventListener('click', this.openGitHubButtonClickHandler.bind(this))
     }
 
-    private async openRuTrackerButtonClickHandler() {
+    private async openGitHubButtonClickHandler() {
         await browser.tabs.create({
-            url: this._ruTrackerURL
+            url: this._gitHubURL
         })
     }
 
@@ -54,11 +54,11 @@ export class Application implements IApplication {
         return Object.values(SortingOrderType).find((value) => value === this._sortingOrderSelect.value) ?? SortingOrderType.REGISTERED;
     }
 
-    private getOpenRuTrackerButton(openRuTrackerButtonElementId: string): HTMLButtonElement {
-        return document.getElementById(openRuTrackerButtonElementId) as HTMLButtonElement;
+    private getOpenGitHubButton(elementId: string): HTMLButtonElement {
+        return document.getElementById(elementId) as HTMLButtonElement;
     }
 
-    private getSortingOrderSelect(sortingOrderSelectElementId: string): HTMLSelectElement {
-        return document.getElementById(sortingOrderSelectElementId) as HTMLSelectElement;
+    private getSortingOrderSelect(elementId: string): HTMLSelectElement {
+        return document.getElementById(elementId) as HTMLSelectElement;
     }
 }
