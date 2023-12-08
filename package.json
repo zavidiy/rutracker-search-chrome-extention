@@ -6,6 +6,8 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@types/bidirectional-map": "^1.0.4",
+    "bidirectional-map": "^1.1.1",
     "rimraf": "^5.0.5",
     "vite": "^4.0.0",
     "vite-plugin-web-extension": "^4.0.0",

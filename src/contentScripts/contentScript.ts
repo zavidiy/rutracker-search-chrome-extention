@@ -1,27 +1,47 @@
-import {loadSettings} from '../scripts/help';
-import {SortingOrderType} from '../scripts/types';
+import {loadSettings, saveSettings} from '../scripts/help';
+import {Settings, SortingOrderType} from '../scripts/types';
 import {
     SORTING_ORDER_OPTION_BY_TYPE,
     SORTING_ORDER_SELECT_ELEMENT_ID,
     SUBMIT_BUTTON_ELEMENT_ID
 } from '../scripts/staticData';
 
-loadSettings().then(({orderBy}) => {
-    setSortingOrder(orderBy);
+loadSettings().then((settings) => {
+    console.log('Settings loaded', settings);
+
+    setSortingOrder(settings);
 })
 
 
-function setSortingOrder(orderBy: SortingOrderType) {
-    if(orderBy === SortingOrderType.REGISTERED) {
+function setSortingOrder(settings: Settings) {
+    const {orderBy} = settings;
+
+    const sortingOrderSelect = getSortingOrderSelect();
+    const sortingOrderOptionIndex = getSortingOrderOptionIndex(sortingOrderSelect, SORTING_ORDER_OPTION_BY_TYPE.get(orderBy)!);
+
+    getSubmitButton().addEventListener('click', () => {
+        const selectedIndex = sortingOrderSelect.selectedIndex;
+
+        if (selectedIndex === sortingOrderOptionIndex) {
+            return;
+        }
+
+        const orderBy = SORTING_ORDER_OPTION_BY_TYPE.getKey(sortingOrderSelect.options[selectedIndex].value) as SortingOrderType;
+
+        saveSettings({...settings, orderBy}).then(() => {
+            console.log('new orderBy settings saved', orderBy);
+        });
+    });
+
+    if (sortingOrderOptionIndex === -1) {
         return;
     }
 
-    const sortingOrderSelect = getSortingOrderSelect();
-    const sortingOrderOptionIndex = getSortingOrderOptionIndex(sortingOrderSelect, SORTING_ORDER_OPTION_BY_TYPE[orderBy]);
-
-    if (sortingOrderOptionIndex !== -1) {
-        sortingOrderSelect.selectedIndex = sortingOrderOptionIndex;
+    if (sortingOrderSelect.selectedIndex === sortingOrderOptionIndex) {
+        return;
     }
+
+    sortingOrderSelect.selectedIndex = sortingOrderOptionIndex;
 
     submit();
 }

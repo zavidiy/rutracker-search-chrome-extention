@@ -36,6 +36,14 @@
       ],
       "all_frames": true,
       "match_about_blank": true
+    },
+    {
+      "matches": [
+        "https://rutracker.org/forum/tracker.php*"
+      ],
+      "js": [
+        "src/contentScripts/contentScript.ts"
+      ]
     }
   ]
 }

@@ -101,22 +101,8 @@ async function search(text: string | undefined, background: boolean) {
         return;
     }
 
-    const tab = await browser.tabs.create({
+    await browser.tabs.create({
         url: "https://rutracker.org/forum/tracker.php?nm=" + encodeURIComponent(text),
         active: !background
     });
-
-    if (!tab.id) {
-        return;
-    }
-
-    await browser.scripting.executeScript(
-        {
-            target: {
-                tabId: tab.id,
-                allFrames: true
-            },
-            files: ['/src/contentScripts/contentScript.js'],
-        },
-    );
 }
