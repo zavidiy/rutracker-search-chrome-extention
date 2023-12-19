@@ -1,7 +1,7 @@
 import {Settings} from '../../types';
-import {SettingsProvider} from './impls/SettingsProvider';
+import {SettingsStorage} from './impls/SettingsStorage';
 
-export interface ISettingsProvider extends SettingsProvider {
+export interface ISettingsStorage extends SettingsStorage {
     getSettings(): Promise<Settings>;
 
     saveSettings(settings: Settings): Promise<void>;

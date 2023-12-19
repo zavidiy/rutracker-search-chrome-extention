@@ -1,9 +1,9 @@
-import {ISettingsProvider} from '../ISettingsProvider';
+import {ISettingsStorage} from '../ISettingsStorage';
 import {Settings} from '../../../types';
 import browser from 'webextension-polyfill';
 import {DEFAULT_SETTINGS} from '../../../staticData';
 
-export class SettingsProvider implements ISettingsProvider {
+export class SettingsStorage implements ISettingsStorage {
     async getSettings(): Promise<Settings> {
         const loadedSettings = await browser.storage.local.get();
 

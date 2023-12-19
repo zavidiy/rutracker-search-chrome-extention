@@ -1,5 +1,6 @@
 import {defineConfig} from "vite";
 import webExtension, {readJsonFile} from "vite-plugin-web-extension";
+import {preact} from '@preact/preset-vite';
 
 function generateManifest() {
     const manifest = readJsonFile("src/manifest.json");
@@ -13,6 +14,7 @@ function generateManifest() {
 
 export default defineConfig({
     plugins: [
+        preact(),
         webExtension({
             manifest: generateManifest,
             watchFilePaths: ["package.json", "manifest.json"],
