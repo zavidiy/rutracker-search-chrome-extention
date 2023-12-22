@@ -1,5 +1,5 @@
-import {ISettingsStorage} from '../../SettingsProvider/ISettingsStorage';
-import {Settings} from '../../../types';
+import {ISettingsStorage} from '../../../common/SettingsStorage/ISettingsStorage';
+import {Settings} from '../../../common/types';
 
 export type AppProps = {
     settingsStorage: ISettingsStorage

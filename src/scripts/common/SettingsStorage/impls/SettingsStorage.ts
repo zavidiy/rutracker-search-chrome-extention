@@ -1,5 +1,5 @@
 import {ISettingsStorage} from '../ISettingsStorage';
-import {Settings} from '../../../types';
+import {Settings} from '../../types';
 import browser from 'webextension-polyfill';
 import {DEFAULT_SETTINGS} from '../../../staticData';
 

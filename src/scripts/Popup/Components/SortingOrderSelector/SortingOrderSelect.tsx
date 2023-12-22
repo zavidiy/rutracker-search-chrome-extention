@@ -1,6 +1,6 @@
 import {Component} from 'preact';
 import {ChangeEvent} from 'preact/compat';
-import {SortingOrderType} from '../../../types';
+import {SortingOrderType} from '../../../common/types';
 import {SortingOrderSelectorProps} from './types';
 
 export class SortingOrderSelect extends Component <SortingOrderSelectorProps> {

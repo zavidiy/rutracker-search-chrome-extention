@@ -1,6 +1,6 @@
 import {render} from 'preact';
 import App from './Components/Application/App';
-import {SettingsStorage} from './SettingsProvider/impls/SettingsStorage';
+import {SettingsStorage} from '../common/SettingsStorage/impls/SettingsStorage';
 
 const root = document.querySelector('#root');
 

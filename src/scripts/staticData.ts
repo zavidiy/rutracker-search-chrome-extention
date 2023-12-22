@@ -1,4 +1,4 @@
-import {Settings, SortingOrderType} from './types';
+import {Settings, SortingOrderType} from './common/types';
 import BiMap from 'bidirectional-map';
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -17,12 +17,3 @@ export const SORTING_ORDER_OPTION_BY_TYPE = new BiMap<string>({
     numberOfLeeches: '11',
     size: '7'
 })
-
-export const Test: Record<SortingOrderType, string> = {
-    registered: '1',
-    topicName: '2',
-    numberOfDownloads: '4',
-    numberOfSeeds: '10',
-    numberOfLeeches: '11',
-    size: '7'
-}

@@ -1,4 +1,4 @@
-import {Settings} from '../../types';
+import {Settings} from '../types';
 import {SettingsStorage} from './impls/SettingsStorage';
 
 export interface ISettingsStorage extends SettingsStorage {

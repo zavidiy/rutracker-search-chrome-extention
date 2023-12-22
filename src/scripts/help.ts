@@ -1,5 +1,5 @@
 import {DEFAULT_SETTINGS} from './staticData';
-import {Settings} from './types';
+import {Settings} from './common/types';
 import browser from 'webextension-polyfill';
 
 export async function loadSettings(): Promise<Settings> {

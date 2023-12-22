@@ -1,4 +1,4 @@
-import {SortingOrderType} from '../../../types';
+import {SortingOrderType} from '../../../common/types';
 
 export type SortingOrderSelectorProps = {
     orderBy: SortingOrderType

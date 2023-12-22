@@ -1,5 +1,5 @@
 import {loadSettings, saveSettings} from '../scripts/help';
-import {Settings, SortingOrderType} from '../scripts/types';
+import {Settings, SortingOrderType} from '../scripts/common/types';
 import {
     SORTING_ORDER_OPTION_BY_TYPE,
     SORTING_ORDER_SELECT_ELEMENT_ID,
@@ -11,7 +11,6 @@ loadSettings().then((settings) => {
 
     setSortingOrder(settings);
 })
-
 
 function setSortingOrder(settings: Settings) {
     const {orderBy} = settings;

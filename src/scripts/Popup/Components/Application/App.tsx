@@ -2,7 +2,7 @@ import {Component} from 'preact';
 import {OpenURLButton} from '../OpenURLButton/OpenURLButton';
 import {SortingOrderSelect} from '../SortingOrderSelector/SortingOrderSelect';
 import {AppProps, AppState} from './types';
-import {Settings, SortingOrderType} from '../../../types';
+import {Settings, SortingOrderType} from '../../../common/types';
 import {DEFAULT_SETTINGS} from '../../../staticData';
 
 export default class App extends Component<AppProps, AppState> {
