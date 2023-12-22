@@ -1,9 +1,27 @@
 import {Component} from 'preact';
 import {OpenURLButton} from '../OpenURLButton/OpenURLButton';
 import {SortingOrderSelect} from '../SortingOrderSelector/SortingOrderSelect';
-import {AppProps} from './types';
+import {AppProps, AppState} from './types';
+import {Settings, SortingOrderType} from '../../../types';
+import {DEFAULT_SETTINGS} from '../../../staticData';
 
-export default class App extends Component<AppProps> {
+export default class App extends Component<AppProps, AppState> {
+    state = {
+        settings: {
+            orderBy: DEFAULT_SETTINGS.orderBy
+        }
+    }
+
+    componentDidMount() {
+        this.loadSettings();
+    }
+
+    async componentDidUpdate(_: AppProps, prevState: AppState) {
+        if (prevState.settings !== this.state.settings) {
+            await this.saveSettings();
+        }
+    }
+
     render() {
         return (
             <>
@@ -14,7 +32,8 @@ export default class App extends Component<AppProps> {
 
                 <section class="settings">
                     <div class="settings__option">
-                        <SortingOrderSelect settingsStorage={this.props.settingsStorage}/>
+                        <SortingOrderSelect orderBy={this.state.settings.orderBy}
+                                            changeOrderByHandler={this.changeOrderByHandler.bind(this)}/>
                     </div>
                 </section>
 
@@ -25,5 +44,26 @@ export default class App extends Component<AppProps> {
                 </footer>
             </>
         );
+    }
+
+    private loadSettings() {
+        this.props.settingsStorage.getSettingsAsync().then(this.updateSettingsState.bind(this));
+    }
+
+    private async saveSettings() {
+        await this.props.settingsStorage.saveSettingsAsync(this.state.settings);
+    }
+
+    private changeOrderByHandler(orderBy: SortingOrderType) {
+        this.updateSettingsState({
+            ...this.state.settings,
+            orderBy: orderBy
+        })
+    }
+
+    private updateSettingsState(settings: Settings) {
+        this.setState({
+            settings: {...settings}
+        });
     }
 }

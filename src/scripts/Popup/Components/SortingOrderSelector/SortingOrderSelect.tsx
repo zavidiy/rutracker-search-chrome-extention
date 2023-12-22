@@ -1,33 +1,16 @@
 import {Component} from 'preact';
 import {ChangeEvent} from 'preact/compat';
 import {SortingOrderType} from '../../../types';
-import {SortingOrderSelectorProps, SortingOrderSelectorState} from './types';
+import {SortingOrderSelectorProps} from './types';
 
-export class SortingOrderSelect extends Component <SortingOrderSelectorProps, SortingOrderSelectorState> {
-    constructor(props: SortingOrderSelectorProps) {
-        super(props);
-
-        this.state = {
-            settings: {
-                orderBy: SortingOrderType.REGISTERED
-            }
-        }
-
-        this.props.settingsStorage.getSettings().then((settings) => {
-            console.log('settings loaded', settings);
-            this.setState({
-                settings: {...settings}
-            });
-        });
-    }
-
+export class SortingOrderSelect extends Component <SortingOrderSelectorProps> {
     render() {
         return (
             <>
                 <label for="sortingOrderSelect">
                     Order by (default):
                 </label>
-                <select id="sortingOrderSelect" value={this.state.settings.orderBy}
+                <select id="sortingOrderSelect" value={this.props.orderBy}
                         onChange={this.onChangeHandler.bind(this)}>
                     <option value="registered">Registered</option>
                     <option value="topicName">Topic name</option>
@@ -47,18 +30,11 @@ export class SortingOrderSelect extends Component <SortingOrderSelectorProps, So
             return;
         }
 
+        console.log(e.target.value)
+
         const sortingOrderType = this.getSortingOrderType(e.target.value);
 
-        console.log('sorting order changed', sortingOrderType);
-
-        this.setState({
-            settings: {
-                ...this.state.settings,
-                orderBy: sortingOrderType
-            }
-        })
-
-        await this.props.settingsStorage.saveSettings(this.state.settings);
+        this.props.changeOrderByHandler(sortingOrderType);
     }
 
     private getSortingOrderType(value: string): SortingOrderType {

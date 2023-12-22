@@ -1,10 +1,6 @@
-import {ISettingsStorage} from '../../SettingsProvider/ISettingsStorage';
-import {Settings} from '../../../types';
+import {SortingOrderType} from '../../../types';
 
 export type SortingOrderSelectorProps = {
-    settingsStorage: ISettingsStorage
-};
-
-export type SortingOrderSelectorState = {
-    settings: Settings
+    orderBy: SortingOrderType
+    changeOrderByHandler: (value: SortingOrderType) => void
 };

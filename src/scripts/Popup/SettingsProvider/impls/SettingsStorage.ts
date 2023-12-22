@@ -4,7 +4,7 @@ import browser from 'webextension-polyfill';
 import {DEFAULT_SETTINGS} from '../../../staticData';
 
 export class SettingsStorage implements ISettingsStorage {
-    async getSettings(): Promise<Settings> {
+    async getSettingsAsync(): Promise<Settings> {
         const loadedSettings = await browser.storage.local.get();
 
         this.removeNonRelevantFields(loadedSettings);
@@ -15,7 +15,7 @@ export class SettingsStorage implements ISettingsStorage {
         };
     }
 
-    async saveSettings(settings: Settings) {
+    async saveSettingsAsync(settings: Settings) {
         await browser.storage.local.set(settings);
     }
 
