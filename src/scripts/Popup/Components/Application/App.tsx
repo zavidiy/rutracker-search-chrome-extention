@@ -11,15 +11,18 @@ export default class App extends Component<AppProps, AppState> {
             orderBy: DEFAULT_SETTINGS.orderBy
         }
     }
+    private _savedSettings?: Settings;
 
     componentDidMount() {
         this.loadSettings();
     }
 
-    async componentDidUpdate(_: AppProps, prevState: AppState) {
-        if (prevState.settings !== this.state.settings) {
-            await this.saveSettings();
+    componentDidUpdate() {
+        if (this.compareSavedSettings(this.state.settings)) {
+            return;
         }
+
+        this.saveSettings();
     }
 
     render() {
@@ -47,11 +50,36 @@ export default class App extends Component<AppProps, AppState> {
     }
 
     private loadSettings() {
-        this.props.settingsStorage.getSettingsAsync().then(this.updateSettingsState.bind(this));
+        this.props.settingsStorage.getSettingsAsync().then(this.loadSettingsHandler.bind(this));
     }
 
-    private async saveSettings() {
-        await this.props.settingsStorage.saveSettingsAsync(this.state.settings);
+    private loadSettingsHandler(loadedSettings: Settings) {
+        if (this.compareSavedSettings(loadedSettings)) {
+            return;
+        }
+
+        this.updateSavedSettings(loadedSettings);
+        this.updateSettingsState(loadedSettings);
+
+        console.log('settings loaded', loadedSettings);
+    }
+
+    private compareSavedSettings(newSettings: Settings) {
+        return JSON.stringify(newSettings) === JSON.stringify(this._savedSettings);
+    }
+
+    private updateSavedSettings(settings: Settings) {
+        this._savedSettings = settings;
+    }
+
+    private saveSettings() {
+        this.props.settingsStorage.saveSettingsAsync(this.state.settings).then(this.saveSettingsHandler.bind(this));
+    }
+
+    private saveSettingsHandler(savedSettings: Settings) {
+        this.updateSavedSettings(savedSettings);
+
+        console.log('settings saved', savedSettings);
     }
 
     private changeOrderByHandler(orderBy: SortingOrderType) {

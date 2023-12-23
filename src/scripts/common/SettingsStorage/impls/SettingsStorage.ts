@@ -17,6 +17,8 @@ export class SettingsStorage implements ISettingsStorage {
 
     async saveSettingsAsync(settings: Settings) {
         await browser.storage.local.set(settings);
+
+        return settings;
     }
 
     private removeNonRelevantFields(loadedSettings: { [key: string]: any }) {

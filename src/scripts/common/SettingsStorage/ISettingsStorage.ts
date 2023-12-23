@@ -1,9 +1,8 @@
 import {Settings} from '../types';
-import {SettingsStorage} from './impls/SettingsStorage';
 
-export interface ISettingsStorage extends SettingsStorage {
+export interface ISettingsStorage {
     getSettingsAsync(): Promise<Settings>;
 
-    saveSettingsAsync(settings: Settings): Promise<void>;
+    saveSettingsAsync(settings: Settings): Promise<Settings>;
 }
 
