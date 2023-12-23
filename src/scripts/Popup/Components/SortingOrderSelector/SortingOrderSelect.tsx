@@ -6,7 +6,7 @@ import {SortingOrderSelectorProps} from './types';
 export class SortingOrderSelect extends Component <SortingOrderSelectorProps> {
     render() {
         return (
-            <>
+            <div className="settings__option">
                 <label for="sortingOrderSelect">
                     Order by (default):
                 </label>
@@ -19,7 +19,7 @@ export class SortingOrderSelect extends Component <SortingOrderSelectorProps> {
                     <option value="numberOfLeeches">Number of leeches</option>
                     <option value="size">Size</option>
                 </select>
-            </>
+            </div>
         );
     }
 

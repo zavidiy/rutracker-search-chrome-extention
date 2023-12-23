@@ -11,6 +11,7 @@ export default class App extends Component<AppProps, AppState> {
             orderBy: DEFAULT_SETTINGS.orderBy
         }
     }
+
     private _savedSettings?: Settings;
 
     componentDidMount() {
@@ -34,10 +35,8 @@ export default class App extends Component<AppProps, AppState> {
                 </header>
 
                 <section class="settings">
-                    <div class="settings__option">
-                        <SortingOrderSelect orderBy={this.state.settings.orderBy}
-                                            changeOrderByHandler={this.changeOrderByHandler.bind(this)}/>
-                    </div>
+                    <SortingOrderSelect orderBy={this.state.settings.orderBy}
+                                        changeOrderByHandler={this.changeOrderByHandler.bind(this)}/>
                 </section>
 
                 <footer class="footer">
