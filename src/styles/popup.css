@@ -49,7 +49,6 @@ body {
 }
 
 .footer {
-    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,9 +56,33 @@ body {
 }
 
 .footer__link {
-    color: #006699;
     background: none;
     border: none;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: lighter;
+    min-width: 50px;
+}
+
+.loading {
+    position: relative;
+    height: 50px;
+}
+
+.loading__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #535f62;
+    font-size: 30px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }

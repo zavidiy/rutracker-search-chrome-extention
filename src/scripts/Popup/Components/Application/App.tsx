@@ -5,6 +5,7 @@ import {AppProps, AppState} from './types';
 import {Settings, SortingOrderType} from '../../../common/types';
 import {DEFAULT_SETTINGS} from '../../../staticData';
 import {compareSettings} from '../../../help';
+import {Loading} from '../Loading/Loading';
 
 export default class App extends Component<AppProps, AppState> {
     state = {
@@ -28,25 +29,33 @@ export default class App extends Component<AppProps, AppState> {
     }
 
     render() {
-        return (
-            <>
+        return <>
                 <header class="header">
                     <img class="header__logo" src="/icon.svg" alt="logo"/>
                     <h1 class="header__title">RuTracker.org Search</h1>
                 </header>
 
                 <section class="settings">
-                    <SortingOrderSelect orderBy={this.state.settings.orderBy}
-                                        changeOrderByHandler={this.changeOrderByHandler.bind(this)}/>
+                    {this.renderSettings()}
                 </section>
 
                 <footer class="footer">
                     <OpenURLButton url={'https://github.com/zavidiy/rutracker-search-chrome-extention'}>
-                        GitHub
+                        <i className="fa-brands fa-github"></i>
                     </OpenURLButton>
                 </footer>
-            </>
-        );
+            </>;
+    }
+
+    private renderSettings() {
+        if (!this._savedSettings) {
+            return <Loading/>;
+        }
+
+        return <>
+            <SortingOrderSelect orderBy={this.state.settings.orderBy}
+                                changeOrderByHandler={this.changeOrderByHandler.bind(this)}/>
+        </>;
     }
 
     private loadSettings() {

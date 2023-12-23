@@ -6,5 +6,6 @@ export type AppProps = {
 };
 
 export type AppState = {
-    settings: Settings
+    settings?: Settings
+    savedSettings?: Settings;
 }
