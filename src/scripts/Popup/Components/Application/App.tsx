@@ -4,6 +4,7 @@ import {SortingOrderSelect} from '../SortingOrderSelector/SortingOrderSelect';
 import {AppProps, AppState} from './types';
 import {Settings, SortingOrderType} from '../../../common/types';
 import {DEFAULT_SETTINGS} from '../../../staticData';
+import {compareSettings} from '../../../help';
 
 export default class App extends Component<AppProps, AppState> {
     state = {
@@ -64,7 +65,7 @@ export default class App extends Component<AppProps, AppState> {
     }
 
     private compareSavedSettings(newSettings: Settings) {
-        return JSON.stringify(newSettings) === JSON.stringify(this._savedSettings);
+        return compareSettings(newSettings, this._savedSettings);
     }
 
     private updateSavedSettings(settings: Settings) {

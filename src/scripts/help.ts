@@ -25,3 +25,7 @@ export async function saveSettings(settings: Settings) {
     await browser.storage.local.set(settings);
     // localStorage.setItem("settings", JSON.stringify(settings));
 }
+
+export function compareSettings(settingsA?: Settings, settingsB?: Settings) {
+    return JSON.stringify(settingsA) === JSON.stringify(settingsB);
+}
